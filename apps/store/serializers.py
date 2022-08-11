@@ -2,7 +2,7 @@ from rest_framework import serializers
 # ============================================================================ #
 from decimal import Decimal
 # ============================================================================ #
-from . models import Product, Collection
+from . models import Product, Collection, Review
 # ============================================================================ #
 
 
@@ -29,4 +29,20 @@ class CollectionSerializer(serializers.ModelSerializer):
         model = Collection
         fields = ['id', 'title', 'products_count']
 
-    products_count = serializers.IntegerField()
+    products_count = serializers.IntegerField(read_only=True)
+
+
+
+
+# ============================= REVIEWSERIALIZER ============================= #
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ['id', 'date', 'name', 'description']
+
+    def create(self, validated_data):
+        print("Validateeee go: ->", validated_data)
+        print("Contexteee go: ->", self.context)
+        product_id = self.context['product_id']
+        return Review.objects.create(product_id=product_id, **validated_data)

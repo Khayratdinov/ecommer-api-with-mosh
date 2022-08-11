@@ -49,8 +49,11 @@ LOCAL_APPS = [
 
 
 THIRD_PARTY_APPS = [
+
     "rest_framework",
     "debug_toolbar",
+    "django_filters",
+    
 ]
 
 
@@ -154,5 +157,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Decimal to string 
 REST_FRAMEWORK = {
-    'COERCE_DECIMAL_TO_STRING': False
+    'COERCE_DECIMAL_TO_STRING': False,
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE': 10
 }
