@@ -54,12 +54,15 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 
 
+# ========================== SIMPLEPRODUCTSERIALIZER ========================= #
 
 class SimpleProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['id', 'title', 'unit_price']
 
+
+# ============================ CARTITEMSERIALIZER ============================ #
 
 class CartItemSerializer(serializers.ModelSerializer):
     product = SimpleProductSerializer()
@@ -71,6 +74,10 @@ class CartItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = CartItem
         fields = ['id', 'product', 'quantity', 'total_price']
+
+
+
+# ============================== CARTSERIALIZER ============================== #
 
 
 class CartSerializer(serializers.ModelSerializer):
@@ -86,6 +93,8 @@ class CartSerializer(serializers.ModelSerializer):
         fields = ['id', 'items', 'total_price']
 
 
+
+# =========================== ADDCARTITEMSERIALIZER ========================== #
 
 class AddCartItemSerializer(serializers.ModelSerializer):
     product_id = serializers.IntegerField()
@@ -113,6 +122,10 @@ class AddCartItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = CartItem
         fields = ['id', 'product_id', 'quantity']
+
+
+
+# ========================= UPDATECARTITEMSERIALIZER ========================= #
 
 class UpdateCartItemSerializer(serializers.ModelSerializer):
     class Meta:

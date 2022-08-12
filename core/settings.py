@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -43,8 +44,8 @@ LOCAL_APPS = [
     "apps.likes",
     "apps.playground",
     "apps.store",
-    "apps.store_custom",
     "apps.tags",
+    "apps.users",
 ]
 
 
@@ -53,6 +54,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "debug_toolbar",
     "django_filters",
+    "djoser",
     
 ]
 
@@ -105,7 +107,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': "django.db.backends.postgresql",
-        'NAME': "ecommer-db",
+        'NAME': "ecommer",
         'USER': "nurpolat",
         'PASSWORD': "admin12345",
         'HOST': "",
@@ -161,4 +163,25 @@ REST_FRAMEWORK = {
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     # 'PAGE_SIZE': 10
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+
+
+
+AUTH_USER_MODEL = 'users.User'
+
+
+DJOSER = {
+    'SERIALIZERS': {
+        'user_create' : 'apps.users.serializers.UserCreateSerializer',
+        'current_user' : 'apps.users.serializers.UserSerializer',
+    }
+}
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('JWT',),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1)
 }
