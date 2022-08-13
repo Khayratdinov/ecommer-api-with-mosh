@@ -4,6 +4,8 @@ from . import views
 
 
 
+# ================================== ROUTERS ================================= #
+
 router = routers.DefaultRouter()
 router.register('products', views.ProductViewSet, basename='products')
 router.register('collections', views.CollectionViewSet)
